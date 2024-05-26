@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gait Recognition System</title>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row p-0 m-0">
+
+            <div class="col-6 mt-5">
+                <div class="table-responsive border border-warning" style="padding: 10px 10px 10px 10px;">
+                    <div>
+                        <!-- video trigger modal -->
+                        <img class="img-responsive img-thumbnail" data-toggle="modal" data-target="#modal-video"
+                            width="500" height="320" src="{% url 'video_feed' %}">
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-video" tabindex="-1" aria-labelledby="videoModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="videoModalLabel">Video</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-content p-3">
+                                        <img src="{% url 'video_feed' %}" id="stream" class="img-fluid">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="text-center p-1 mt-2 mb-3 bg-danger text-white">Fatigue Analysis Results</h5>
+                        <strong id="gaitResult" class="d-flex justify-content-center">Waiting for the result of Fatigue
+                            Analysis Server...</strong>
+                        <div class="d-flex justify-content-center">
+                            <div id="spinner1" class="spinner-border text-dark my-2" role="status" aria-hidden="true"
+                                style="display: block;"></div>
+                            <!-- <div class="d-flex justify-content-center">
+                                <p>Task ID: {{ task_id }}</p>
+                                <p>Status: <span id="status">{{ status }}</span></p>
+                            </div> -->
+
+                        </div>
+                    </div>
+                    <!-- <div>
+                            <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target="#collapse-silhouette" aria-expanded="true" aria-controls="collapseExample">
+                                Silhouettes
+                            </button>
+                            <button class="btn btn-primary mt-3 ml-2" type="button" data-toggle="collapse" data-target="#collapse-image" aria-expanded="false" aria-controls="collapseExample2">
+                                Alpha Images
+                            </button>
+                        </div> -->
+                </div>
+            </div>
+
+            <!-- <div class="col-6 mt-5">
+                    <div class="table-responsive border border-warning" style="padding: 10px 10px 10px 10px;">
+                        <h5 class="text-center p-1 mb-1 bg-success text-white">Rank-6 of Gait Similarity Probability</h5>
+                        <table id="table" class="table text-center table-striped table-dark table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Vid</th>
+                                    <th scope="col">Dist</th>
+                                    <th scope="col"><i>Prob</i><sub>(<i>simi</i>)</sub> (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center mb-2">
+                            <div id="spinner2" class="spinner-border text-dark my-2" role="status" aria-hidden="true" style="display: block;"></div>
+                        </div>
+                    </div>
+                </div> -->
+
+        </div>
+
+
+
+
+    </div>
+
+    <footer>
+        <div class="row mt-5 mb-2">
+            <div class="col">
+                <p class="text-center"> © Copyright 2024 - Smart Fatigue Analysis System using Gait Sequence.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let imageUpdateInterval;
+
+        function updateImage() {
+            var img = document.getElementById('stream'); // Get the image element by its ID ('stream')
+            img.src = "{% url 'video_feed' %}"; // Set the 'src' attribute of the image to the URL of the video feed
+        }
+
+        function startImageUpdate() {
+            imageUpdateInterval = setInterval(updateImage, 100); // Update image every 100 milliseconds
+        }
+
+        function stopImageUpdate() {
+            clearInterval(imageUpdateInterval); // Clear the interval timer to stop updating the image
+        }
+
+        // Call the startImageUpdate function to begin updating the image
+        startImageUpdate();
+
+        // Update every 100 milliseconds
+        const taskId = '{{ task_id }}';
+
+        function checkStatus() {
+            fetch(`/get_status/${taskId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'Processing') {
+                        setTimeout(checkStatus, 5000); // Check again after 5 seconds
+                    } else {
+                        let resultMessage;
+                        if (data.status === '0') {
+                            resultMessage = 'Worker not Fatigued';
+                        } else if (data.status === '1') {
+                            resultMessage = 'Worker Fatigued';
+                        } else {
+                            resultMessage = data.status; // Display any other status messages directly
+                        }
+                        document.getElementById('gaitResult').innerText = resultMessage;
+                        document.getElementById('spinner1').style.display = 'none';
+                        // Stop updating the image once the result is received
+                        stopImageUpdate();
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('gaitResult').innerText = 'Error checking status';
+                    document.getElementById('spinner1').style.display = 'none';
+                });
+        }
+
+        setTimeout(checkStatus, 5000); // Initial check after 5 seconds
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

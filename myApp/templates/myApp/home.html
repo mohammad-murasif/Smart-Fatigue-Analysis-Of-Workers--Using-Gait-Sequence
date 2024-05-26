@@ -1,0 +1,233 @@
+{% extends 'myApp/base.html' %}
+{% block content%}
+
+
+
+<div class="row">
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container text-center text-md-left" data-aos="fade-up">
+      <h1>Welcome to <span>Fatigue Analysis System</span></h1>
+      <h2>Analyze your data to understand fatigue patterns and improve performance</h2>
+      <a href="{% url 'train' %}" class="button" button style="margin:10px;">Register Worker</a>
+      <a href="{% url 'trainrecog' %}" class="button" button style="margin:10px;">Train Recognizer</a>
+      <a href="{% url 'test' %}" class="button" button style="margin:10px;">Start Analysis</a>
+    </div>
+  </section>
+</div>
+
+
+<div class="container-fluid " id="Our-Team">
+
+  <section id="Our-Team ">
+    <div class="row mt-0 pt-0 align-items-center bg-dark">
+      <div class="col-12 d-flex flex-column justify-content-center align-items-center Our-Team ">
+        <span class="team-span">Our Team</span>
+
+      </div>
+
+    </div>
+    <div class="row text-center justify-content-center">
+      <!-- Guide item -->
+      <div class="col-lg-4 d-flex align-items-center ">
+        <div class="bg-grey rounded shadow-sm  mt-10 py-5 px-4 guide-card  ">
+          <img
+            src="https://media.licdn.com/dms/image/C4D03AQFRGKVzeXVjhg/profile-displayphoto-shrink_200_200/0/1662117060386?e=2147483647&v=beta&t=B4iJNzQaMlC-6jQbvnYmsJ14_yqv50mj920piDvBcB4"
+            alt="" width="180" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">Mr. Khalil Ahmed</h5>
+          <span class="small text-uppercase text-muted block">Guide</span>
+          <p style="text-align: justify;">
+
+            An accomplished Assistant Professor and the Head of the Computer Science and Engineering Department at BGSB
+            University, Rajouri. With over 15 years of teaching and research experience, he excels in Image Processing,
+            Algorithms, and Cloud Computing.received multiple awards for his contributions to workshops and
+            research.
+          </p>
+          <ul class="social mb-0 list-inline mt-3">
+            <li class="list-inline-item">
+              <a href="#" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="social-link">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="social-link">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div><!-- End Guide item -->
+
+      <div class="col-lg-6">
+        <div class="row justify-content-center">
+          <!-- Team item 1 -->
+          <div class="col-md-6 mb-2">
+            <div class="bg-white rounded shadow-sm py-4 px-2 lead-team-card">
+              <img src="https://murasifmushtaq.me/assets/pic.JPG" alt="" width="100"
+                class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+              <h5 class="mb-0">Murasif Mushtaq</h5>
+              <span class="small text-uppercase text-muted">Team Lead</span>
+              <p style="text-align: center;">
+                Python Backend Development,Computer Vison
+                Machine Learning,
+                Cloud Compuing
+
+              </p>
+              <ul class="social mb-0 list-inline mt-3">
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- End Team item 1 -->
+
+          <!-- Team item 2 -->
+          <div class="col-md-6 mb-2">
+            <div class="bg-white rounded shadow-sm py-4 px-2 lead-team-card">
+              <img
+                src="https://media.licdn.com/dms/image/D4D03AQF01OEUMZH52A/profile-displayphoto-shrink_800_800/0/1682008856119?e=1721865600&v=beta&t=vDr8qpN3Qhc3fAxwz3LimeiaA1Jdmi1lGmz-sVt1ryY"
+                alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+              <h5 class="mb-0 mt-2">Faisal Gulzar</h5>
+              <span class="small text-uppercase text-muted">Member</span>
+              <p style="text-align: center;" class="mb-2 mt-3">
+                Frontend Development,HTML5, CSS, Javascript,Bootstrap.
+              </p>
+              <ul class="social mb-0 list-inline mt-3">
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- End Team item 2 -->
+
+          <!-- Team item 3 -->
+          <div class="col-md-6 mb-2">
+            <div class="bg-white rounded shadow-sm py-5 px-4 team-card">
+              <img
+                src="https://media.licdn.com/dms/image/D5635AQGwiEdg9ELIUw/profile-framedphoto-shrink_800_800/0/1709229278279?e=1717034400&v=beta&t=LwuMb4JBWhfrXcy5CQ_y1BclqXtiUD2YQAin3rccy9E"
+                alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+              <h5 class="mb-0">Sahil Rafiq</h5>
+              <span class="small text-uppercase text-muted">Member</span>
+              <ul class="social mb-0 list-inline mt-3">
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- End Team item 3 -->
+
+          <!-- Team item 4 -->
+          <div class="col-md-6 mb-2">
+            <div class="bg-white rounded shadow-sm py-5 px-4 team-card">
+              <img
+                src="https://media.licdn.com/dms/image/D4D35AQFsZBKle0t88w/profile-framedphoto-shrink_800_800/0/1693739855774?e=1717034400&v=beta&t=ZsoTa23L_q1yvz2GDhRm_zwGbB79u7HH13A_KXYjENk"
+                alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+              <h5 class="mb-0">Jashwanth Guptha</h5>
+              <span class="small text-uppercase text-muted">Member</span>
+              <ul class="social mb-0 list-inline mt-3">
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- End Team item 4 -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div id='flex'>
+  <p id='para' style="text-align: center; background-color: rgb(8, 8, 8); color: white;">Made with Love ❤️</p>
+</div> -->
+
+
+
+
+{%endblock%}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Feed</title>
+</head>
+<body>
+    <h1>Video Feed</h1>
+    <img id="video-feed" src="" alt="Video Feed">
+
+    <script>
+        // WebSocket connection
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/video-feed/');
+
+        // When a new message is received
+        socket.onmessage = function(event) {
+            // Update the <img> element with the received frame data
+            const imgElement = document.getElementById('video-feed');
+            imgElement.src = URL.createObjectURL(event.data);
+        };
+
+        // Log errors
+        socket.onerror = function(error) {
+            console.error('WebSocket error:', error);
+        };
+    </script>
+</body>
+</html>

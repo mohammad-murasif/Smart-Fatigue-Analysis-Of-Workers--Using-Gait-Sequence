@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fatigue Analysis</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customcss/base.css' %}" rel="stylesheet">
+  <link href="{% static 'customcss/workerform.css' %}" rel="stylesheet">
+  <link href="{% static 'customcss/home.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+
+        <header id="header" class="fixed-top d-flex align-items-center">
+          <div class="container d-flex align-items-center">
+
+            <div class="logo me-auto">
+              <h1><a href="index.html">Fatigue Analysis System</a></h1>
+              <!-- Uncomment below if you prefer to use an image logo -->
+              <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+              <ul>
+                <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'train' %}">Register Worker</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'trainrecog' %}">Train</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'test' %}">Test</a></li>
+                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+          </div>
+        </header>
+      </div>
+    </div>
+
+
+    <div class="row" id="main">
+
+      {%block content%}
+      {%endblock%}
+    </div>
+
+  </div><!-- End Footer -->
+
+
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <footer id="sticky-footer" class="flex-shrink-0  bg-dark text-white-50">
+        <div class="container text-center">
+          <small>Copyright &copy; Smart Fatigue Analysis System</small>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+</div> -->
+
+
+  <!-- <script type="text/javascript" src="{% static 'js/gait.js' %}"></script> -->
+  <script src="{% static 'js/gait.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/workerform.js' %}"></script>
+
+
+
+</body>
+
+</html>
