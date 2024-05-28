@@ -11,8 +11,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'customcss/base.css' %}" rel="stylesheet">
+  <link href="{% static 'customcss/style.css' %}" rel="stylesheet">
   <link href="{% static 'customcss/workerform.css' %}" rel="stylesheet">
-  <link href="{% static 'customcss/home.css' %}" rel="stylesheet">
+  <!-- <link href="{% static 'customcss/home.css' %}" rel="stylesheet"> -->
 
 </head>
 
@@ -23,28 +24,35 @@
     <div class="row">
       <div class="col-12">
 
-        <header id="header" class="fixed-top d-flex align-items-center">
-          <div class="container d-flex align-items-center">
 
-            <div class="logo me-auto">
-              <h1><a href="index.html">Fatigue Analysis System</a></h1>
-              <!-- Uncomment below if you prefer to use an image logo -->
-              <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-            </div>
+        <header id="header" class="fixed-top">
+          <div class="container d-flex align-items-center justify-content-between">
+              <div class="logo" id="logo">
+                  <h1><a href="{% url 'index' %}">Fatigue Analysis System</a></h1>
+                  <!-- Uncomment below if you prefer to use an image logo -->
+                  <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+              </div>
+              
+              <nav id="navbar" class="navbar navbar-expand-lg">
 
-            <nav id="navbar" class="navbar order-last order-lg-0">
-              <ul>
-                <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'train' %}">Register Worker</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'trainrecog' %}">Train</a></li>
-                <li><a class="nav-link scrollto" href="{% url 'test' %}">Test</a></li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-              </ul>
-              <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
-
+                <a class="nav-link" href="{% url 'index' %}" style="top:0;">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                </a>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav ms-auto">
+                          <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'train' %}">Register Worker</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'trainrecog' %}">Train</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'test' %}">Test</a></li>
+                          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                      </ul>
+                  </div>
+              </nav>
           </div>
-        </header>
+      </header>
+
       </div>
     </div>
 
@@ -70,6 +78,13 @@
 
   </div>
 </div> -->
+<footer>
+  <!-- <div class="row mt-5 mb-2 ">
+      <div class="col">
+          <p class="text-center"> © Copyright 2024 - Smart Fatigue Analysis System using Gait Sequences.</p>
+      </div>
+  </div>
+</footer> -->
 
 
   <!-- <script type="text/javascript" src="{% static 'js/gait.js' %}"></script> -->

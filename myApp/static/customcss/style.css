@@ -1,0 +1,113 @@
+#About {
+    padding: 5px 0;
+    margin-top: 30px;
+  }
+
+  #About h3 {
+  font-size: 24px;
+  color: #fff; 
+  background-color: #000; 
+  padding: 10px; 
+  margin-bottom: 20px;
+  font-weight: bold;
+  }
+
+  #About p {
+    font-size: 20px; 
+    color: #000000;
+    /* padding-left: 100px; */
+    margin-top: 30px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  #About img {
+    max-width: 100%; 
+    
+  }
+
+  #heading {
+    background-color: #000;
+    height: 50px;
+    justify-content: center;
+  }
+  #heading h3 {
+    font-size: 24px;
+    color: #fff; /* White text color */
+    background-color: #000; /* Black background color */
+    padding: 10px; /* Add padding for better readability */
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  #Our-Team {
+    background-color: #edebf4;
+    color: #000000;
+  }
+  #Our-Team .guide-card {
+    padding: 60px;
+    margin: 20px;
+    width: 570px;   
+    height: 570px;
+    border-radius: 10px;
+    /* outline: 1px solid #000; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* transition: box-shadow 0.3s ease-in-out; */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    transition: box-shadow 0.3s, border-color 0.3s; 
+  }
+
+  #Our-Team .guide-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #c0c0c0;
+  }
+
+  #Our-Team .lead-team-card {
+    padding: 15px;
+    width: 370px;   
+    height: 280px;
+    border-radius: 10px;
+    /* outline: 2px solid #000; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* transition: box-shadow 0.3s ease-in-out; */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    transition: box-shadow 0.3s, border-color 0.3s; 
+  }
+
+  #Our-Team .lead-team-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #c0c0c0;
+  }
+
+  #Our-Team .team-card {
+    padding: 15px;
+    width: 370px;   
+    height: 280px;
+    border-radius: 10px;
+    /* outline: 2px solid #000; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* transition: box-shadow 0.3s ease-in-out; */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    transition: box-shadow 0.3s, border-color 0.3s; 
+  }
+
+  #Our-Team .team-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #c0c0c0;
+  }
+
+
+  
+  #hero {
+    width: 100%;
+    height: 70vh;
+    background: url("https://source.unsplash.com/random") center center;
+    background-size: cover;
+    position: relative;
+    margin-top: 70px;
+    padding: 0;
+  
+  }

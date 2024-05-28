@@ -250,7 +250,7 @@
   #hero {
     width: 100%;
     height: 70vh;
-    background: url("https://source.unsplash.com/random") center center;
+    background: url("https://static.vecteezy.com/system/resources/previews/009/302/766/non_2x/silhouette-landscape-with-fog-forest-pine-trees-mountains-illustration-of-night-view-mist-black-and-white-good-for-wallpaper-background-banner-cover-poster-free-vector.jpg") center center;
     background-size: cover;
     position: relative;
     margin-top: 70px;
@@ -313,6 +313,7 @@
     #hero {
       height: calc(100vh - 70px);
     }
+
   }
   
   @media (max-width: 768px) {
@@ -397,3 +398,13 @@
 
 }
 
+
+@media (max-width: 330px) {
+  .logo h1 {
+      font-size: 16px; /* Adjust this value as needed */
+  }
+
+  .logo h1 a {
+      font-size: inherit; /* Ensure the link inherits the h1's font size */
+  }
+}

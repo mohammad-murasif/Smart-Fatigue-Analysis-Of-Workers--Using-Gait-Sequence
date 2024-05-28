@@ -6,10 +6,10 @@ from django.core.files.storage import FileSystemStorage
 import os
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import Video_form, worker_registerForm
-from .models import Video, worker
+from .models import Video, worker , Supervisors
 from django.contrib import messages
-from myProject.settings import BASE_DIR1, BASE_DIR
-
+from myProject.settings import  BASE_DIR
+import json
 from .util.pretreatment import videoFeed
 from django.views.decorators import gzip
 from .util.test import preProccessVideo
@@ -17,21 +17,20 @@ from .util.identification import WorkerRegistration, FaceRecognition
 import threading
 import uuid
 from django.views.decorators.csrf import csrf_exempt
-
+from datetime import time,datetime
+import requests
+import vonage
+client = vonage.Client(key="3ddeaf85", secret="bR4JBOduhHEtIQXE")
 workerFaceRegistration = WorkerRegistration()
 workerFaceRecognition = FaceRecognition()
 
 
 def index(request):
-    # last_video=Video.objects.last()
 
-    # print(last_video.video.url)
 
     return render(request, 'myApp/home.html',)
 
 
-# def home(request):
-#     return render(request, 'home.html')
 
 
 # register worker
@@ -49,7 +48,7 @@ def registerWorker(request):
             videoPath = BASE_DIR + VideoObj.video.url
             workerFaceRegistration.register_worker(
                 videoPath, WokerObj.workerId)
-            print('SAVED')
+
         return redirect('results')
     else:
         formWorker = worker_registerForm()
@@ -71,8 +70,7 @@ def UpdateWorkerFaceData(request):
             videoObj = Video(video=file)
             videoObj.save()
             videoPath = BASE_DIR + Video.objects.last().video.url
-            result = workerFaceRecognition.update_worker_faceData(
-                workerid, videoPath)
+            result = workerFaceRecognition.update_worker_faceData(workerid, videoPath)
             if result == 0:
                 return JsonResponse({'results': 'Facial Features Extracted Successfully'})
             else:
@@ -81,7 +79,6 @@ def UpdateWorkerFaceData(request):
             return JsonResponse({'results': e})
     else:
         form = Video_form()
-        print(form)
         workers = worker.objects.all()
         return render(request, 'myApp/trainrecog.html', {'workers': workers})
 
@@ -125,34 +122,15 @@ def results(request):
     thread.start()
     thread1=threading.Thread(target=process_identification, args=(task1_id, path))
     thread1.start()
-    # if request.method=='POST':
 
-    #     res=workerFaceRecognition.faceDetectAndRecognize(path)
-    #     if res =='NOTDETECTED':
-    #         return JsonResponse({'workerName':res})
-    #     else:
-    #         workerobj=get_object_or_404(worker,workerId=res)
-    #         print(workerobj.workerName)
-    #         return JsonResponse({'workerName':workerobj.workerName})
-
-    # res=Fatigueresult(path)
-    # print(res)
-    # result = preProccessVideo(path)
-    # print(result)
 
     return render(request, 'myApp/results.html', {'task_id': task_id, 'status': 'Processing','task1_id':task1_id,'status1':'Identfication-in-process'})
 
 
 def process_fatigue(task_id, path):
     try:
-        # workerFaceRecognition.train_classifier()
         res = preProccessVideo(path)
-        # workerId=workerFaceRecognition.faceDetectAndRecognize(path)
         processing_status[task_id] = res
-        # if workerId:
-            # workerObj=get_object_or_404(worker,id=workerId)
-            # processing_status['workername'] = workerObj.workerName
-
     except Exception as e:
         processing_status[task_id] = f'Error: {str(e)}'
 
@@ -204,6 +182,42 @@ def identifyWorkerView(request):
 
 
 
+#Sending Fatigued Worker Data to Supervisior
+@csrf_exempt
+def post_fatigue_data(request):
+    if request.method == 'POST':
+        try:
+            supervisorobj = Supervisors.objects.last()
+            data = json.loads(request.body)
+            worker_id = data.get('workerId')
+            worker_name = data.get('workerName')
+            result = data.get('result')
+            now = datetime.now() # current date and time
+            timestamp=now.strftime("%m/%d/%Y, %H:%M:%S")
+            sms = vonage.Sms(client)
+            responseData = sms.send_message(
+                {
+                    "from": "SMART FATIGUE DETECTION",
+                    "to": str("91"+supervisorobj.phone_num),
+                    "text": f'worker ID : {worker_id},Name: {worker_name},status: {result}, At Date: {timestamp}',
+                }
+            )
+
+            if responseData["messages"][0]["status"] == "0":
+                print("Message sent successfully.")
+            else:
+                print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
+
+
+            print(f"Worker ID: {worker_id}, Worker Name: {worker_name}, Result: {result},Time: {timestamp}")
+            # Return a success response
+            return JsonResponse({'status': 'success', 'message': 'Data received successfully.'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON.'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
         
     
         
@@ -217,8 +231,6 @@ def trainWorkerFaces(request):
             return JsonResponse({'message': 'Training failed', 'error': str(e)}, status=500)
     return JsonResponse({'message': 'Invalid request method'}, status=405)
 
-
-    
 
 @gzip.gzip_page
 def video_feed(request):

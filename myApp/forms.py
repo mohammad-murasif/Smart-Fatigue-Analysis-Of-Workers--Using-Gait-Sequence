@@ -1,4 +1,4 @@
-from .models import Video, workerProfile, worker
+from .models import Video, worker
 from django import forms
 
 
@@ -8,10 +8,7 @@ class Video_form(forms.ModelForm):
         model=Video
         fields=['video']
         
-class workerProfile_form(forms.ModelForm):
-    class Meta:
-        model=workerProfile
-        fields=['id', 'photo']
+
         
 class worker_registerForm(forms.ModelForm):
     class Meta:

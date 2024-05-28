@@ -125,16 +125,20 @@ class FaceRecognition:
                 # Predict using the classifier
                 embedding = embedding.reshape(1, -1)  # Reshape for prediction
                 prediction = self.classifier.predict(embedding)
-                predicted_worker_id = self.label_encoder.inverse_transform(prediction)
-                predictions.append(predicted_worker_id[0])
-                embeddings.append(embedding.flatten())
+                probabilities = self.classifier.predict_proba(embedding)
+                print('PROBABILITY:::::',np.max(probabilities))
+                if np.max(probabilities) > 0.90:
+                    predicted_worker_id = self.label_encoder.inverse_transform(prediction)
+                    # print('PREDICTED ID::::',predicted_worker_id)
+                    predictions.append(predicted_worker_id[0])
+                    embeddings.append(embedding.flatten())
 
-                # Draw a rectangle around the face and display the ID
-                cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-                cv2.putText(img, str(predicted_worker_id[0]), (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
-                face_count +=1
+                    # Draw a rectangle around the face and display the ID
+                    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                    cv2.putText(img, str(predicted_worker_id[0]), (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
+                    face_count +=1
 
-            print(f'TOTAL FACES ::::: {face_count}')
+            # print(f'TOTAL FACES ::::: {face_count}')
             
             # cv2.imshow('Video', img)
             k = cv2.waitKey(10) & 0xff
@@ -147,7 +151,7 @@ class FaceRecognition:
         # Find the most frequent worker ID and check its occurrence
         if predictions:
             most_common_worker_id, count = collections.Counter(predictions).most_common(1)[0]
-            if count > 5:
+            if count >=4:
                 print(f'Most frequent worker ID: {most_common_worker_id}')
                 return most_common_worker_id
             else:
@@ -155,7 +159,7 @@ class FaceRecognition:
                 return "No face detected"
         else:
             print('No faces detected')
-            return "NOTDETECTED"
+            return '0'
 
     def get_embedding(self, face_img):
         face_img = cv2.resize(face_img, (160, 160))

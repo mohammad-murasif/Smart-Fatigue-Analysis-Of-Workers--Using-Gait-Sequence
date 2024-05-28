@@ -1,6 +1,6 @@
 {% extends 'myApp/base.html' %}
 {% block content%}
-
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
 
         .header {
             width: 100%;
-            background-image: url('https://source.unsplash.com/random');
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20200731/pngtree-blue-carbon-background-with-sport-style-and-golden-light-image_371487.jpg');
             background-size: cover;
             background-position: center;
             background-color: #4CAF50;
@@ -26,11 +26,12 @@
             margin-top: 70px;
             padding: 40px;
             text-align: center;
+            
 
         }
 
         .header h1 {
-            color: white;
+            color: rgb(252, 252, 252);
             font-size: 30px;
             font-family: 'Adobe Caslon Pro', serif;
             font-weight: bold;
@@ -84,6 +85,9 @@
 
     <div class="container">
         <h2>Enter Data For Analysis</h2>
+        <p>
+            Ensure to upload a video in landscape orientation and Person is walking sideways
+        </p>
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- <label for="name">Name</label>

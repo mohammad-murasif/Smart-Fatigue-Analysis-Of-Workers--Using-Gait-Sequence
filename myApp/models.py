@@ -3,9 +3,17 @@ from .validators import file_size
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
-class workerProfile(models.Model):
-    photo = models.ImageField(upload_to='media/profile', default='media/profile/default.jpg', verbose_name='profile')
-    workerId = models.ForeignKey('worker', verbose_name="worker Id", on_delete=models.CASCADE)
+class Supervisors(models.Model):
+    supervisorId = models.AutoField(primary_key=True)
+    name = models.CharField(verbose_name="Supervisor Name",max_length=100)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,10}$', message="Enter phone number without +91")
+    phone_num = models.CharField(validators=[phone_regex], max_length=112, blank=False, unique=True) # Validators should be a list
+    email= models.EmailField(verbose_name="Email",max_length=255,blank=False,unique=True,null=False)    
+    def __str__(self):
+        return str(self.name)
+
+
+
 
 class worker(models.Model):
     workerId = models.AutoField(primary_key=True)
