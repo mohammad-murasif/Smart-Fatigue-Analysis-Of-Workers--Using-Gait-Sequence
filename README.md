@@ -54,7 +54,9 @@ The objective of this project is to create a reliable, non-intrusive system that
 - **Scikit-Learn**: For machine learning models.
 - **TensorFlow**: For deep learning models.
 
-## Contributing
+   ## Contributors
+   - [Mohammad Murasif](https://github.com/mohammad-murasif)
+   - [Sahil Rafiq](https://github.com/sahilrafiq)
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
