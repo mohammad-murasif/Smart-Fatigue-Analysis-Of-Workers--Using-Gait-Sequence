@@ -58,3 +58,7 @@ The objective of this project is to create a reliable, non-intrusive system that
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
+## Contributors
+
+- [Mohammad Murasif](https://github.com/mohammad-murasif)
+- [Sahil Rafiq](https://github.com/sahilrafiq)
